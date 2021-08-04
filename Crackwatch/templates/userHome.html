@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/UserHomeView.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+
+    <div class="background">
+      <!-- Header -->
+      <div class="header">
+        <div class="HeaderText">
+          Take Your Time
+        </div>
+        <div class="UsernamePanel">
+          <div class="Username">
+            Current User: {{username}}
+          </div>
+          <div class="Logout">
+            <a href="{% url 'index' %}" style="text-decoration: none; color: white;">Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Bar -->
+      <div class="NavigationBar">
+        <div class="NavigationCells HomeCell">
+          <a href="{% url 'Users:UsersHome' username %}" style="text-decoration: none; color: white;">Home</a>
+        </div>
+        <div class="NavigationCells GamesCell">
+          <a href="{% url 'Games:AllGames' username %}" style="text-decoration: none; color: white;">Games</a>
+        </div>
+        <div class="NavigationCells StudiosCell">
+          <a href="{% url 'Studio:AllStudios' username %}" style="text-decoration: none; color: white;">Studios</a>
+        </div>
+        <div class="NavigationCells CrackerCell">
+          <a href="{% url 'CrackGroups:AllCrackGroups' username %}" style="text-decoration: none; color: white;">Groups</a>
+        </div>
+        <div class="NavigationCells ProtectionCell">
+          <a href="{% url 'Protection:AllProtections' username %}" style="text-decoration: none; color: white;">Protections</a>
+        </div>
+        <div class="NavigationCells MarketplaceCell">
+          <a href="{% url 'Marketplace:AllMarketplaces' username %}" style="text-decoration: none; color: white;">Marketplaces</a>
+        </div>
+      </div>
+
+      <!-- Main Body -->
+      <div class="MainBody">
+
+        <!-- Latest Cracked Games -->
+        <div>
+          <table>
+            <tr>
+              <th colspan="2">Latest Cracked Games</th>
+            </tr>
+            {% for game in games %}
+            <tr>
+              <td width="400px"><a href="{% url 'Games:GamesPage' game.ID username %}" style="text-decoration: none; color: white;">{{game.Name}}</a></td>
+              <td width="240px">{{game.Date }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+          <table class="SmallTable">
+            <tr>
+              <th style="font-size: 2.5rem;">Level : {{rank}}</th>
+            </tr>
+            <tr>
+              <td><a href="{% url 'Users:UsersRanks' username %}" style="text-decoration: none; color: white;">Rank: {{ranktext}}</a></td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <!-- Games You Follow -->
+          <table height="300px">
+            <tr>
+              <th colspan="2">Games You Follow</th>
+            </tr>
+            {% for fgame in follows_game %}
+            <tr>
+              <td width="350px"><a href="{% url 'Games:GamesPage' fgame.ID username %}" style="text-decoration: none; color: white;"> {{fgame.Name}} </a></td>
+              <td width="290px">{{fgame.Studio}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+          <!-- Games You Played -->
+          <table height="300px">
+            <tr>
+              <th colspan="2">Games You Played</th>
+            </tr>
+            {% for pgame in played %}
+            <tr>
+              <td width="400px"><a href="{% url 'Games:GamesPage' pgame.ID username %}" style="text-decoration: none; color: white;"> {{pgame.Name}} </a></td>
+              <td width="240px">{{pgame.Rating}}/5</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+
+        <div>
+          <!-- Latest Released Games -->
+          <table>
+            <tr>
+              <th colspan="2">Latest Released Games</th>
+            </tr>
+            {% for released in latest_released %}
+            <tr>
+              <td width="400px"><a href="{% url 'Games:GamesPage' released.ID username %}" style="text-decoration: none; color: white;">{{released.Name}}</a></td>
+              <td width="240px">{{released.Date }}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+  </body>
+</html>

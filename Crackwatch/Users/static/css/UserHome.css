@@ -1,0 +1,120 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Earwig Factory';
+  src: local('earwig factory rg'),
+       url('../static/fonts/earwig factory rg.ttf') format("truetype");
+}
+@@font-face {
+  font-family: 'BLACK AREA';
+  src: local('BLACK AREA'),
+       url('../fonts/BLACK AREA.ttf') format("truetype");
+}
+
+:root{
+  --stylishText: 'Earwig Factory', monospace;
+  --primaryDark: #1A1D1A;
+  --primaryLight: #ddb8ba;
+  --mainTransition:all 0.3s ease-in-out;
+  --letterSpacing: 0.5rem;
+}
+body{
+  font-family: 'Catamaran', sans-serif;
+  src: local('Catamaran-Regular'),
+       url('../static/fonts/Catamaran-Regular.ttf') format("truetype");
+}
+
+/*Header*/
+.header{
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/banner2.jpg') center/cover no-repeat fixed;
+  position: relative;
+}
+
+.banner{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: normal;
+  text-align: center;
+}
+
+.UsernamePanel{
+  font-size: 2rem;
+  font-family: 'BLACK AREA';
+  color: white;
+  background-color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  text-align: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1920px;
+  vertical-align: text-top;
+  text-align: right;
+}
+
+.subtitle{
+  font-size: 3rem;
+  font-family: var(--stylishText);
+  color: white;
+  margin-top: 2rem;
+  text-align: center;
+  animation: slideFromSide 1s ease-in-out 1;
+}
+
+.homepagebutton{
+  display: inline-block;
+  background: var(--primaryLight);
+  text-transform: uppercase;
+  padding: 1.2rem 1.5rem;
+  color: var(--primaryDark);
+  font-weight: bold;
+  outline: 0.2rem solid var(--primaryLight);
+  outline-offset: 4px;
+  cursor: pointer;
+  margin-top: 2rem;
+  text-decoration: none;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  transition: var(--mainTransition);
+  animation: slideFromSide 1s ease-in-out 1;
+}
+
+.homepagebutton:hover{
+  color: white;
+  opacity: 0.7;
+}
+
+.logo{
+  display: block;
+  margin: 0 auto;
+  animation: slideFromTop 1s ease-in-out 1;
+}
+
+
+/*animations*/
+@keyframes slideFromTop {
+  0%{
+    transform: translateY(-500px);
+  }
+  100&{
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slideFromSide {
+  0%{
+    transform: translateX(-1000px);
+  }
+  100&{
+    transform: translatex(0px);
+  }
+}

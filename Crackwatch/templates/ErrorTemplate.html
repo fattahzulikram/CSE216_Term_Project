@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Logged In</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/Success.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+    <header class="header">
+      <div class="banner">
+        <h3 class="subtitle">{{failure}}</h3><br>
+          <a href="{% url 'Admin:AdminHome' user %}" class="homepagebutton">Go Back</a>
+      </div>
+    </header>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{Name}}</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/SingleGame.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+    <div class="background">
+
+      <!-- NavBar -->
+      <div class="NavigationBar">
+        <div class="NavigationCells HomeCell">
+          <a href="{% url 'Users:UsersHome' username %}" style="text-decoration: none; color: white;">Home</a>
+        </div>
+        <div class="NavigationCells GamesCell">
+          <a href="{% url 'Games:AllGames' username %}" style="text-decoration: none; color: white;">Games</a>
+        </div>
+        <div class="NavigationCells StudiosCell">
+          <a href="{% url 'Studio:AllStudios' username %}" style="text-decoration: none; color: white;">Studios</a>
+        </div>
+        <div class="NavigationCells CrackerCell">
+          <a href="{% url 'CrackGroups:AllCrackGroups' username %}" style="text-decoration: none; color: white;">Groups</a>
+        </div>
+        <div class="NavigationCells ProtectionCell">
+          <a href="{% url 'Protection:AllProtections' username %}" style="text-decoration: none; color: white;">Protections</a>
+        </div>
+        <div class="NavigationCells MarketplaceCell">
+          <a href="{% url 'Marketplace:AllMarketplaces' username %}" style="text-decoration: none; color: white;">Marketplaces</a>
+        </div>
+      </div>
+
+
+      <div class="TopDivider"></div>
+
+
+      <div class="MainContainer">
+        <div></div>
+
+
+        <div class="MidColumn">
+
+          {% for game in games %}
+          <div class="InfoBox">
+            <div>
+              {% load static %}
+              <img src="{% static game.Image %}" width="178px" height="237ox">
+            </div>
+
+            <div>
+              <div class="TopBox">
+
+                <div class="CrackStatTitleBox">
+                  <div class="InfoTitle Normal">STATUS</div>
+                  <div class="InfoTitle">
+                    {% if game.Condition == 1 %}
+                      <div class="InfoTitle Cracked">{{game.CrackInfo}}</div>
+                    {% elif game.Condition == 2 %}
+                      <div class="InfoTitle Uncracked">{{game.CrackInfo}}</div>
+                    {% elif game.Condition == 3 %}
+                      <div class="InfoTitle Unreleased">{{game.CrackInfo}}</div>
+                    {% else %}
+                      <div class="InfoTitle NoInfo">{{game.CrackInfo}}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                {% if game.Condition == 1 %}
+                  <div class="InfoBody Cracked" style="margin-top: 10px;">CRACKED</div>
+                {% elif game.Condition == 2 %}
+                  <div class="InfoBody Uncracked" style="margin-top: 10px;">UNCRACKED</div>
+                {% elif game.Condition == 3 %}
+                  <div class="InfoBody Unreleased" style="margin-top: 10px;">UNRELEASED</div>
+                {% else %}
+                  <div class="InfoBody NoInfo" style="margin-top: 10px;">UNAVAILABLE</div>
+                {% endif %}
+
+              </div>
+
+              <div class="BottomBox">
+                <div>
+                  <div class="InfoTitle" style="margin-top: 14px;">NAME</div><br>
+                  <div class="InfoSmallBody">{{game.Name}}</div><br>
+                </div>
+
+                <div class="DateAndStuffs">
+                  <div>
+                    <div class="InfoTitle" style="margin-top: 14px;">RELEASE DATE</div><br>
+                    <div class="InfoSmallBody">{{game.Released}}</div>
+                  </div>
+
+                  <div>
+                    <div class="InfoTitle" style="margin-top: 14px;">CRACK DATE</div><br>
+                    <div class="InfoSmallBody">{{game.CrackDate}}</div>
+                  </div>
+
+                  <div>
+                    <div class="InfoTitle" style="margin-top: 14px;">PROTECTION</div><br>
+                    <div class="InfoSmallBody"><a href="{% url 'Protection:ProtectionPage' game.PRT_ID username %}" style="text-decoration: none; color: #e8e5e0;">{{game.Protection}}</a></div>
+                  </div>
+
+                  <div>
+                    <div class="InfoTitle" style="margin-top: 14px;">SCENE GROUP</div><br>
+                    {% if GROUP_ID == -1 %}
+                      <div class="InfoSmallBody">{{game.SceneGroup}}</div>
+                    {% else %}
+                      <div class="InfoSmallBody"><a href="{% url 'CrackGroups:CGPage' game.GROUP_ID username %}" style="text-decoration: none; color: #e8e5e0;">{{game.SceneGroup}}</a></div>
+                    {% endif %}
+                  </div>
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <!-- Marketplace Info -->
+            <div style="border-left: 1px solid white;">
+              <div class="MarketplaceInfo">
+                <div class="InfoTitle" style="margin-top: 15px; text-align: center;">AVAILABLE AT</div><br>
+                {% for market in markets %}
+                <div class="MarketRow">
+                  <div class="InfoSmallBody" style="text-align: center;"><a href="{% url 'Marketplace:MarketPage' market.ID username %}" style="text-decoration: none; color: #e8e5e0;">{{market.Market}}</a></div>
+                  <div class="InfoSmallBody" style="text-align: center;">{{market.Price}}</div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <!-- Follower And Rating -->
+            <div style="border-left: 1px solid white;">
+              <div class="FollowerAndRatingColumn">
+                <div class="InfoTitle" style="margin-top: 15px; text-align: center;">FOLLOWERS</div>
+                <div></div>
+                <div class="InfoBody Normal" style="text-align: center;font-size: 40px;line-height: 40px;">{{game.Followers}}</div>
+                <div></div>
+                {% if followable == 1 %}
+                  {% if AlreadyFollows == 0 %}
+                    <form method="POST">
+                      {% csrf_token %}
+                      <input type="submit" name="Follow" id="Follow" value="Follow" class="Clickable">
+                    </form>
+                  {% else %}
+                    <div></div>
+                  {% endif %}
+                {% else %}
+                  <div></div>
+                {% endif %}
+                <div class="InfoTitle" style="margin-top: 15px; text-align: center;">RATING: {{game.Rating}}</div>
+
+                <div class="InfoSmallBody" style="margin-top: 15px; text-align: center;">YOUR RATING</div>
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="RatingRow">
+                    <div></div>
+                    {% if Already_Rated == 1 %}
+                      <div><input placeholder={{UserRating}} class="Search-Bar" type="number" name="rating" id="rating" min="1" max="5"></div>
+                    {% else %}
+                      <div><input class="Search-Bar" type="number" name="rating" id="rating" min="1" max="5"></div>
+                    {% endif %}
+                    <div class="InfoSmallBody" style="margin-top: 7px; margin-left: 10px;"> / 5</div>
+                    <input type="submit" name="Rate" id="Rate" value="Rate" class="Clickable" height="30px">
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Body -->
+          <div class="MidDivider"></div>
+
+          <div class="MainBody">
+
+
+            <div style="background-color: rgb(22,22,24);">
+
+              <!-- Crackers -->
+              <div class="RowTitle">CRACKED BY</div><br>
+              {% for Cracker in Crackers %}
+                {% if Cracker.ID == -1 %}
+                  <div class="CrackersRow">{{Cracker.Cracker}}</div><br>
+                {% else %}
+                  <div class="CrackersRow"><a href="{% url 'CrackGroups:CGPage' Cracker.ID username %}" style="text-decoration: none; color: #e8e5e0;">{{Cracker.Cracker}}</a></div><br>
+                {% endif %}
+              {% endfor %}
+              <div style="border-bottom: 1px solid white;"></div>
+
+              <!-- Developer -->
+              <div class="RowTitle">DEVELOPED BY</div><br>
+              {% if game.Stud_Dev_ID == -1 %}
+                <div class="CrackersRow" style="display: block; text-align: center;">{{game.StudioDeveloped}}</div><br>
+              {% else %}
+                <div class="CrackersRow" style="display: block; text-align: center;"><a href="{% url 'Studio:StudioPage' game.Stud_Dev_ID username %}" style="text-decoration: none; color: #e8e5e0;">{{game.StudioDeveloped}}</a></div><br>
+              {% endif %}
+              <div style="border-bottom: 1px solid white;"></div>
+
+              <!-- Publisher -->
+              <div class="RowTitle">PUBLISHED BY</div><br>
+              {% if game.Pub_ID == -1 %}
+                <div class="CrackersRow" style="display: block; text-align: center;">{{game.StudioPublished}}</div><br>
+              {% else %}
+                <div class="CrackersRow" style="display: block; text-align: center;"><a href="{% url 'Studio:StudioPage' game.Pub_ID username %}" style="text-decoration: none; color: #e8e5e0;">{{game.StudioPublished}}</a></div><br>
+              {% endif %}
+              <div style="border-bottom: 1px solid white;"></div>
+            </div>
+
+            <div style="background-color: rgb(22,22,24); border-left: 1px solid white;">
+              <div class="RowTitle" style="font-size: 30px;">DESCRIPTION</div>
+              <div class="Description">
+                {{game.Description}}
+              </div>
+            </div>
+
+            <div style="background-color: rgb(22,22,24); border-left: 1px solid white;">
+              <div class="RowTitle" style="font-size: 30px;">WATCH TRAILER</div>
+              <iframe width="560" height="315" src="{{game.Trailer}}" class="CenterStuff" style="border-bottom: 1px solid white;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <div class="RowTitle" style="font-size: 30px; margin-top:15px; margin-bottom: 15px;">SYSTEM REQUIREMENTS</div>
+              <div class="Description" style="margin-left: 20px;">
+                CPU : {{game.CPU}}
+              </div><br>
+              <div class="Description" style="margin-left: 20px;">
+                GPU : {{game.GPU}}
+              </div><br>
+              <div class="Description" style="margin-left: 20px;">
+                RAM : {{game.RAM}} GB
+              </div><br>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+
+        <div></div>
+      </div>
+
+
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>

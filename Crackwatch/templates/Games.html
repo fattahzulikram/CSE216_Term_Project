@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<table width="100%"  border="1">
+    <tr style="background-color:lightgray">
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Platform</th>
+    </tr>
+    {% for game in games %}
+       <tr>
+           <td><a href="{% url 'Games:GamesPage' game.GameID %}">{{game.Name}}</td>
+           <td>{{game.Genre }}</td>
+           <td>{{game.Platform}}</td>
+       </tr>
+    {% endfor %}
+
+</table>
+</body>
+</html>

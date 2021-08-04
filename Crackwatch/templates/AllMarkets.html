@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Marketplaces</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/MarketList.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+    <div class="background">
+
+      <!-- NavBar -->
+      <div class="NavigationBar">
+        <div class="NavigationCells HomeCell">
+          <a href="{% url 'Users:UsersHome' username %}" style="text-decoration: none; color: white;">Home</a>
+        </div>
+        <div class="NavigationCells GamesCell">
+          <a href="{% url 'Games:AllGames' username %}" style="text-decoration: none; color: white;">Games</a>
+        </div>
+        <div class="NavigationCells StudiosCell">
+          <a href="{% url 'Studio:AllStudios' username %}" style="text-decoration: none; color: white;">Studios</a>
+        </div>
+        <div class="NavigationCells CrackerCell">
+          <a href="{% url 'CrackGroups:AllCrackGroups' username %}" style="text-decoration: none; color: white;">Groups</a>
+        </div>
+        <div class="NavigationCells ProtectionCell">
+          <a href="{% url 'Protection:AllProtections' username %}" style="text-decoration: none; color: white;">Protections</a>
+        </div>
+        <div class="NavigationCells MarketplaceCell">
+          <a href="{% url 'Marketplace:AllMarketplaces' username %}" style="text-decoration: none; color: white;">Marketplaces</a>
+        </div>
+      </div>
+
+      <div class="MainContainer">
+        <div></div>
+
+        <div class="ListContainer">
+
+          <div class="PageInfo"><h3>Marketplaces ({{TotalMarkets}})</h3></div>
+
+          <div class="Divider"></div>
+
+          <div>
+            <div class="Index-Bar MarketInfo">Marketplace</div>
+            <div class="Index-Bar Games">Games</div>
+            <div class="Index-Bar Visit">Link</div>
+          </div>
+
+          <div class="Divider-Bottom"></div>
+
+          {% for Market in Markets %}
+          <div class="Row">
+            <!-- Image -->
+            <div class="Logo">
+              <a href="{% url 'Marketplace:MarketPage' Market.ID username %}">
+                {% load static %}
+                <img src="{% static Market.LOGO %}" width="107px" height="60px">
+              </a>
+            </div>
+
+            <!-- Divider -->
+            <div class="VerticalDivider"></div>
+
+            <!-- Market Name -->
+            <div class="Market MarketInfo">
+              <div class="MarketName"><a href="{% url 'Marketplace:MarketPage' Market.ID username %}" style="text-decoration: none; color: #e8e5e0;">{{Market.Name}}</a></div>
+            </div>
+
+
+            <!-- Total Games -->
+            <div class="Games TotalInfo">
+              <div class="MarketName" style="color: #e8e5e0;">{{Market.TotalGames}}</div>
+            </div>
+
+            <!-- Link -->
+            <div class="Visit Visit2">
+              <div class="Clickable">
+                <a href="{{Market.URL}}" style="color: #e8e5e0; text-decoration: none;">VISIT</a>
+              </div>
+            </div>
+
+          </div>
+          {% endfor %}
+
+        </div>
+
+        <div></div>
+
+      </div>
+
+    </div>
+  </body>
+</html>

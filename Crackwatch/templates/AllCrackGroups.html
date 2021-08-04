@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Crack Groups</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/GroupList.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+    <div class="background">
+      <!-- NavBar -->
+      <div class="NavigationBar">
+        <div class="NavigationCells HomeCell">
+          <a href="{% url 'Users:UsersHome' username %}" style="text-decoration: none; color: white;">Home</a>
+        </div>
+        <div class="NavigationCells GamesCell">
+          <a href="{% url 'Games:AllGames' username %}" style="text-decoration: none; color: white;">Games</a>
+        </div>
+        <div class="NavigationCells StudiosCell">
+          <a href="{% url 'Studio:AllStudios' username %}" style="text-decoration: none; color: white;">Studios</a>
+        </div>
+        <div class="NavigationCells CrackerCell">
+          <a href="{% url 'CrackGroups:AllCrackGroups' username %}" style="text-decoration: none; color: white;">Groups</a>
+        </div>
+        <div class="NavigationCells ProtectionCell">
+          <a href="{% url 'Protection:AllProtections' username %}" style="text-decoration: none; color: white;">Protections</a>
+        </div>
+        <div class="NavigationCells MarketplaceCell">
+          <a href="{% url 'Marketplace:AllMarketplaces' username %}" style="text-decoration: none; color: white;">Marketplaces</a>
+        </div>
+      </div>
+
+      <div class="MainContainer">
+        <div></div>
+
+        <!-- Game List -->
+        <div class="ListContainer">
+          <div class="PageInfo"><h3>Groups ({{total}})</h3></div>
+
+          <div class="Divider"></div>
+
+          <div>
+            <div class="Index-Bar GroupInfo">Group</div>
+            <div class="Index-Bar Games">Games</div>
+            <div class="Index-Bar Latest">Latest Cracked Game</div>
+            <div class="Index-Bar Followers">Followers</div>
+          </div>
+
+          <div class="Divider-Bottom"></div>
+
+          {% for CG in CGs %}
+            <div class="Row">
+              <!-- Image -->
+              <div class="Logo">
+                <a href="{% url 'CrackGroups:CGPage' CG.CGID username %}">
+                  {% load static %}
+                  <img src="{% static CG.LOGO %}" width="107px" height="60px">
+                </a>
+              </div>
+
+              <!-- Divider -->
+              <div class="VerticalDivider"></div>
+
+              <!-- Group Name -->
+              <div class="Group GroupInfo">
+                <div class="GroupName"><a href="{% url 'CrackGroups:CGPage' CG.CGID username %}" style="text-decoration: none; color: #e8e5e0;">{{CG.Name}}</a></div>
+              </div>
+
+              <!-- Total Cracks -->
+              <div class="Games TotalInfo">
+                <div class="GroupName" style="color: #e8e5e0;">{{CG.TotalCracks}}</div>
+              </div>
+
+
+              <!-- Latest Cracked Game -->
+              <div class="GameInfo">
+                {% if CG.TotalCracks == 0 %}
+                  <div class="GroupName" style="color: #e8e5e0;">No Game Available</div>
+                {% else %}
+                  <div class="GroupName"><a href="{% url 'Games:GamesPage' CG.LatestGameId username %} " style="text-decoration: none; color: #e8e5e0;">{{CG.LatestGameName}}</a></div>
+                {% endif %}
+              </div>
+              <div class="VerticalDivider"></div>
+              <div class="Logo">
+                {% if CG.TotalCracks == 0 %}
+                  {% load static %}
+                  <img src="{% static 'images/GameImages/NoGame.png' %}" width="107px" height="60ox">
+                {% else %}
+                  <a href="{% url 'Games:GamesPage' CG.LatestGameId username %}">
+                    {% load static %}
+                    <img src="{% static CG.LatestGameImage %}" width="107px" height="60ox">
+                  </a>
+                {% endif %}
+              </div>
+
+
+              <!-- Followers -->
+              <div class="Followers TotalInfo"><div class="GroupName">{{CG.TotalFollowers}}</div></div>
+
+            </div>
+          {% endfor %}
+
+        </div>
+
+        <div></div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

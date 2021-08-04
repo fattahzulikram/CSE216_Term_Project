@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add Game</title>
+    {% block head %}
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/AddStuffs.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+
+    <div class="background">
+      <div class="UpperText">Add New Game</div>
+      <div>
+        <form method="POST" autocomplete="off" class="Form" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="FormHeader"><h1>Game Informations</h1></div>
+          <!-- Form Starts -->
+          <div class="FormBody">
+            <div class="MainForm">
+              <div>
+                <p>
+                  <label for="name">NAME</label>
+                  <input type="text" name="name" id="name">
+                </p>
+
+                <p>
+                  <label for="Genre">GENRE</label>
+                  <input type="text" name="Genre" id="Genre">
+                </p>
+
+                <p>
+                  <label for="platform">PLATFORM</label>
+                  <input type="text" name="platform" id="platform">
+                </p>
+
+                <p>
+                  <label for="std_dev">DEVELOPED BY</label>
+                  <div class="select">
+                    <select name="std_dev" id="std_dev">
+                      <option selected disabled value="-1">Choose Studio</option>
+                      {% for studio in studio_names %}
+                      <option value="{{studio}}">{{studio}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </p>
+
+                <p>
+                  <label for="cpu">CPU</label>
+                  <input type="text" name="cpu" id="cpu">
+                </p>
+
+                <p>
+                  <label for="gpu">GPU</label>
+                  <input type="text" name="gpu" id="gpu">
+                </p>
+
+                <p>
+                  <label for="ram">RAM</label>
+                  <input type="text" name="ram" id="ram">
+                </p>
+
+                <p>
+                  <label for="wide_image">PAGE IMAGE</label>
+                  <input type="file" name="wide_image" id="wide_image">
+                  <!--<input type="text" name="wide_image" id="wide_image">-->
+                </p>
+
+              </div>
+              <div></div>
+              <div>
+                <p>
+                  <label for="std_pub">PUBLISHED BY</label>
+                  <div class="select">
+                    <select name="std_pub" id="std_pub">
+                      <option selected disabled>Choose Studio</option>
+                      {% for studio in studio_names %}
+                      <option value="{{studio}}">{{studio}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </p>
+
+                <p>
+                  <label for="protection">PROTECTION</label>
+                  <div class="select">
+                    <select name="protection" id="protection">
+                      <option selected disabled>Choose Protection</option>
+                      {% for prt in prts %}
+                      <option value="{{prt}}">{{prt}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </p>
+
+                <p>
+                  <label for="market">AVAILABLE AT</label>
+                  <div class="select">
+                    <select name="market" id="market">
+                      <option selected disabled>Choose Marketplace</option>
+                      {% for market in markets %}
+                      <option value="{{market}}">{{market}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </p>
+
+                <p>
+                  <label for="price">PRICE</label>
+                  <input type="text" name="price" id="price">
+                </p>
+
+                <p>
+                  <label for="trailer">TRAILER</label>
+                  <input type="text" name="trailer" id="trailer">
+                </p>
+
+                <p>
+                  <label for="image">MENU IMAGE</label>
+                  <input type="file" name="image" id="image">
+                  <!--<input type="text" name="image" id="image">-->
+                </p>
+
+                <p>
+                  <label for="description">DESCRIPTION</label>
+                  <input type="text" name="description" id="description">
+                </p>
+                <p>
+                  <label for="Date">Release Date</label>
+                  <div class="select">
+                    <input type="date" name="Date" id="Date" class="datepicker">
+                  </div>
+                </p>
+              </div>
+              <div></div>
+            </div>
+
+            <div class="SubmissionButton">
+              <div></div>
+              <div><input type="submit" name="go" id="go" value="Submit" class ="button"></div>
+              <div></div>
+            </div>
+            <!-- Form Ends -->
+          </div>
+
+        </form>
+      </div>
+      <div></div>
+
+    </div>
+
+  </body>
+</html>

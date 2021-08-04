@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Studios</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/StudioList.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+    <div class="background">
+      <!-- NavBar -->
+      <div class="NavigationBar">
+        <div class="NavigationCells HomeCell">
+          <a href="{% url 'Users:UsersHome' username %}" style="text-decoration: none; color: white;">Home</a>
+        </div>
+        <div class="NavigationCells GamesCell">
+          <a href="{% url 'Games:AllGames' username %}" style="text-decoration: none; color: white;">Games</a>
+        </div>
+        <div class="NavigationCells StudiosCell">
+          <a href="{% url 'Studio:AllStudios' username %}" style="text-decoration: none; color: white;">Studios</a>
+        </div>
+        <div class="NavigationCells CrackerCell">
+          <a href="{% url 'CrackGroups:AllCrackGroups' username %}" style="text-decoration: none; color: white;">Groups</a>
+        </div>
+        <div class="NavigationCells ProtectionCell">
+          <a href="{% url 'Protection:AllProtections' username %}" style="text-decoration: none; color: white;">Protections</a>
+        </div>
+        <div class="NavigationCells MarketplaceCell">
+          <a href="{% url 'Marketplace:AllMarketplaces' username %}" style="text-decoration: none; color: white;">Marketplaces</a>
+        </div>
+      </div>
+
+
+
+      <div class="MainContainer">
+
+        <div>
+        </div>
+
+
+        <div class="ListContainer">
+          <div class="PageInfo"><h3>Studios ({{total}})</h3></div>
+
+          <div class="Divider"></div>
+
+          <div>
+            <div class="Index-Bar StudioInfo">Studio</div>
+            <div class="Index-Bar Est_Year">Established</div>
+            <div class="Index-Bar GamesDeveloped">Developed</div>
+            <div class="Index-Bar GamesPublished">Published</div>
+            <div class="Index-Bar LatestGame">Latest Game</div>
+          </div>
+
+          <div class="Divider-Bottom"></div>
+
+          {% for Studio in Studios %}
+          <div class="Row">
+            <!-- Image -->
+            <div class="Logo">
+              <a href="{% url 'Studio:StudioPage' Studio.ID username %}">
+                {% load static %}
+                <img src="{% static Studio.LOGO %}" width="107px" height="60px">
+              </a>
+            </div>
+
+            <!-- Divider -->
+            <div class="VerticalDivider"></div>
+
+            <!-- Studio Name -->
+            <div class="Studio StudioInfo">
+              <div class="StudioName"><a href="{% url 'Studio:StudioPage' Studio.ID username %}" style="text-decoration: none; color: #e8e5e0;">{{Studio.Name}}</a></div>
+            </div>
+
+            <!-- Est Year -->
+            <div class="Est_Year TotalInfo">
+              <div class="StudioName" style="color: #e8e5e0;">{{Studio.EST_YEAR}}</div>
+            </div>
+
+            <!-- Developed -->
+            <div class="GamesDeveloped TotalInfo">
+              <div class="StudioName" style="color: #e8e5e0;">{{Studio.TotalGamesDev}}</div>
+            </div>
+
+            <!-- Developed -->
+            <div class="GamesPublished TotalInfo">
+              <div class="StudioName" style="color: #e8e5e0;">{{Studio.TotalGamesPub}}</div>
+            </div>
+
+            <!-- Latest Game -->
+            <div class="GameInfo">
+              {% if Studio.TotalGames == 0 %}
+                <div class="StudioName" style="color: #e8e5e0;">No Game Available</div>
+              {% else %}
+                <div class="StudioName"><a href="{% url 'Games:GamesPage' Studio.LatestGameID username %} " style="text-decoration: none; color: #e8e5e0;">{{Studio.LatestGameName}}</a></div>
+              {% endif %}
+            </div>
+            <div class="VerticalDivider"></div>
+            <div class="Logo">
+              {% if Studio.TotalGames == 0 %}
+                {% load static %}
+                <img src="{% static 'images/GameImages/NoGame.png' %}" width="107px" height="60ox">
+              {% else %}
+                <a href="{% url 'Games:GamesPage' Studio.LatestGameID username %}">
+                  {% load static %}
+                  <img src="{% static Studio.LatestGameImage %}" width="107px" height="60ox">
+                </a>
+              {% endif %}
+            </div>
+
+          </div>
+
+          {% endfor %}
+
+
+        </div>
+
+        <div>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

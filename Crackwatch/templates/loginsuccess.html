@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Logged In</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/LoginSuccess.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+    <header class="header">
+      <div class="banner">
+        <h3 class="subtitle">{{success}}</h3><br>
+        {% if superuser == '0' %}
+          <a href="{% url 'Users:UsersHome' user %}" class="homepagebutton"> Go To Profile </a>
+        {% else %}
+          <a href="{% url 'Admin:AdminHome' user %}" class="homepagebutton"> Go To Profile </a>
+        {% endif %}
+      </div>
+    </header>
+  </body>
+</html>

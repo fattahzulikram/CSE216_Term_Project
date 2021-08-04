@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add Game To Marketplace</title>
+    {% block head %}
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/AddStuffs.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+
+    <div class="background">
+      <div class="UpperText">Add Cracked Game</div>
+      <div>
+        <form method="POST" autocomplete="off" class="SingleColumnForm">
+          {% csrf_token %}
+          <div class="FormHeader"><h1>Informations</h1></div>
+
+          <div class="FormBodySingle">
+            <div class="MainFormSingle">
+              <div>
+
+                <p>
+                  <label for="game">NAME</label>
+                  <div class="select">
+                    <select name="game" id="game">
+                      <option selected disabled>Choose Game</option>
+                      {% for game in games %}
+                      <option value="{{game}}">{{game}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </p>
+
+                <p>
+                  <label for="market">Marketplace</label>
+                  <div class="select">
+                    <select name="market" id="market">
+                      <option selected disabled>Choose Crack Group</option>
+                      {% for market in markets %}
+                      <option value="{{market}}">{{market}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </p>
+
+                <p>
+                  <label for="price">Price</label>
+                  <input type="text" name="price" id="price">
+                </p>
+              </div>
+              <div></div>
+            </div>
+
+            <div class="SubmissionButtonSingle">
+              <div></div>
+              <div><input type="submit" name="go" id="go" value="Submit" class ="button"></div>
+              <div></div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div></div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Games</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/GameList.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+    <div class="background">
+      <!-- NavBar -->
+      <div class="NavigationBar">
+        <div class="NavigationCells HomeCell">
+          <a href="{% url 'Users:UsersHome' username %}" style="text-decoration: none; color: white;">Home</a>
+        </div>
+        <div class="NavigationCells GamesCell">
+          <a href="{% url 'Games:AllGames' username %}" style="text-decoration: none; color: white;">Games</a>
+        </div>
+        <div class="NavigationCells StudiosCell">
+          <a href="{% url 'Studio:AllStudios' username %}" style="text-decoration: none; color: white;">Studios</a>
+        </div>
+        <div class="NavigationCells CrackerCell">
+          <a href="{% url 'CrackGroups:AllCrackGroups' username %}" style="text-decoration: none; color: white;">Groups</a>
+        </div>
+        <div class="NavigationCells ProtectionCell">
+          <a href="{% url 'Protection:AllProtections' username %}" style="text-decoration: none; color: white;">Protections</a>
+        </div>
+        <div class="NavigationCells MarketplaceCell">
+          <a href="{% url 'Marketplace:AllMarketplaces' username %}" style="text-decoration: none; color: white;">Marketplaces</a>
+        </div>
+      </div>
+
+
+      <!-- Game List Nav Bar -->
+      <div class="MainContainer">
+        <div></div>
+
+        <!-- Game List -->
+        <div class="ListContainer">
+          <div class="PageInfo"><h3>Games ({{total}})</h3></div>
+          <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            <div class="Bar-Games">
+              <div class="Games-Nav">
+                <div><input placeholder="Search Game Title" class="Search-Bar" type="text" name="title" id="title"></div>
+
+                <div>
+                  <select name="crackstatus" id="crackstatus" class="Select-Box">
+                    <option value="0">Select Cracked Status</option>
+                    <option value="1">Cracked</option>
+                    <option value="2">Not Cracked</option>
+                  </select>
+                </div>
+
+                <div>
+                  <select name="releasedstatus" id="releasedstatus" class="Select-Box">
+                    <option value="0">Select Released Status</option>
+                    <option value="1">Released</option>
+                    <option value="2">Not Released</option>
+                  </select>
+                </div>
+
+                <div><input placeholder="Search By Genre" class="Search-Bar" type="text" name="genre" id="genre"></div>
+
+                <div><input type="submit" name="go" id="go" value="Search" class="Clickable"></div>
+              </div>
+
+            </div>
+          </form>
+
+          <div class="Divider"></div>
+
+
+          <div>
+            <div class="Index-Bar GameBar">Game & Status</div>
+            <div class="Index-Bar ReleasedDateBar">Release Date</div>
+            <div class="Index-Bar CrackedDateBar">Crack Date</div>
+            <div class="Index-Bar StudioBar">Studio</div>
+            <div class="Index-Bar ProtectionBar">DRM</div>
+            <div class="Index-Bar GroupBar">Group</div>
+            <div class="Index-Bar TotalCrackBar">Cracks</div>
+            <div class="Index-Bar BestPriceBar">Best Price</div>
+            <div class="Index-Bar RatingBar">Rating</div>
+            <div class="Index-Bar FollowerBar">Followers</div>
+          </div>
+
+          <div class="Divider-Bottom"></div>
+
+          <!-- Main List -->
+
+          {% for game in games %}
+          <div class="Game-Row">
+            <!-- Image -->
+            <div class="Game-Image">
+              <a href="{% url 'Games:GamesPage' game.GameID username %}">
+                {% load static %}
+                <img src="{% static game.Image %}" width="107px" height="60ox">
+              </a>
+            </div>
+
+            <!-- Divider -->
+            <div class="VerticalDivider"></div>
+
+            <!-- Name And Crack Info -->
+            <div class="GameInfo">
+              <div class="GameName"><a href="{% url 'Games:GamesPage' game.GameID username %} " style="text-decoration: none; color: #e8e5e0;">{{game.Name}}</a></div>
+              {% if game.Condition == 1 %}
+                <div class="CrackDays Cracked">{{game.CrackInfo}}</div>
+              {% elif game.Condition == 2 %}
+                <div class="CrackDays Uncracked">{{game.CrackInfo}}</div>
+              {% elif game.Condition == 3 %}
+                <div class="CrackDays Unreleased">{{game.CrackInfo}}</div>
+              {% else %}
+                <div class="CrackDays NoInfo">{{game.CrackInfo}}</div>
+              {% endif %}
+            </div>
+
+            <!-- Release Date -->
+            <div class="ReleasedDateBar DateInfo">{{game.Released}}</div>
+
+            <!-- Crack Date -->
+            <div class="CrackedDateBar DateInfo">{{game.CrackDate}}</div>
+
+            <!-- Studio -->
+            <div class="StudioBar RegularInfo">
+              {% if Stud_Dev_ID == -1 %}
+                {{game.StudioDeveloped}}
+              {% else %}
+                <a href="{% url 'Studio:StudioPage' game.Stud_Dev_ID username %}" style="text-decoration: none; color: #e8e5e0;">{{game.StudioDeveloped}}</a>
+              {% endif %}
+            </div>
+
+            <!-- Protection -->
+            <div class="ProtectionBar RegularInfo"><a href="{% url 'Protection:ProtectionPage' game.PRT_ID username %}" style="text-decoration: none; color: #e8e5e0;">{{game.Protection}}</a></div>
+
+            <!-- SceneGroup -->
+            <div class="GroupBar RegularInfo">
+              {% if GROUP_ID == -1 %}
+                {{game.SceneGroup}}
+              {% else %}
+                <a href="{% url 'CrackGroups:CGPage' game.GROUP_ID username %}" style="text-decoration: none; color: #e8e5e0;">{{game.SceneGroup}}</a>
+              {% endif %}
+            </div>
+
+            <!-- Cracks -->
+            <div class="TotalCrackBar RegularInfo">{{game.TotalCracks}}</div>
+
+            <!-- Price -->
+            <div class="BestPriceBar RegularInfo">{{game.BestPrice}}</div>
+
+            <!-- Rating -->
+            <div class="RatingBar RegularInfo">{{game.Rating}}</div>
+
+            <!-- Followers -->
+            <div class="FollowerBar RegularInfo">{{game.Followers}}</div>
+
+          </div>
+          {% endfor %}
+        </div>
+
+        <div></div>
+    </div>
+  </body>
+</html>

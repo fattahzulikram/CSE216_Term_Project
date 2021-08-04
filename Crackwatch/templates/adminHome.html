@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/AdminView.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+
+    <div class="background">
+      <!-- Header -->
+      <div class="header">
+        <div class="HeaderText">
+          Take Your Time
+        </div>
+        <div class="UsernamePanel">
+          <div class="Username">
+            Current Admin: {{username}}
+          </div>
+          <div class="Logout">
+            <a href="{% url 'index' %}" style="text-decoration: none; color: white;">Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="Container">
+        <div class="MenuText">Admin Menu</div>
+
+        <div class="NewInnerContainer">
+
+          <div></div>
+
+          <!-- Add Stuffs -->
+
+          <div class="LineOne">
+
+            <div></div>
+            <div class="ButtonHolder Cell1"><a href="{% url 'Admin:AddGame' username %}" style="text-decoration: none; color: white;">Add Game</a></div>
+            <div class="ButtonHolder Cell2"><a href="{% url 'Admin:AddCrackedGame' username %}" style="text-decoration: none; color: white;">Add Cracked Game</a></div>
+            <div class="ButtonHolder Cell3"><a href="{% url 'Admin:AddStudio' username %}" style="text-decoration: none; color: white;">Add Studio</a></div>
+            <div class="ButtonHolder Cell4"><a href="{% url 'Admin:AddGroup' username %}" style="text-decoration: none; color: white;">Add Crack Group</a></div>
+            <div></div>
+
+          </div>
+
+          <div></div>
+
+          <div class="LineTwo">
+
+            <div></div>
+            <div class="ButtonHolder Cell5"><a href="{% url 'Admin:AddProtection' username %}" style="text-decoration: none; color: white;">Add Protection</a></div>
+            <div class="ButtonHolder Cell6"><a href="{% url 'Admin:AddMarketplace' username %}" style="text-decoration: none; color: white;">Add Marketplace</a></div>
+            <div class="ButtonHolder Cell7"><a href="{% url 'Admin:CreateAdmin' username %}" style="text-decoration: none; color: white;">Create New Admin</a></div>
+            <div class="ButtonHolder Cell1"><a href="{% url 'Admin:AddAvailability' username %}" style="text-decoration: none; color: white;">Add Availability</a></div>
+            <div></div>
+
+          </div>
+
+          <div></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

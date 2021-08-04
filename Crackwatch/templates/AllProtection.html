@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Protections</title>
+    {% block head %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ProtectionList.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+    <div class="background">
+
+      <!-- NavBar -->
+      <div class="NavigationBar">
+        <div class="NavigationCells HomeCell">
+          <a href="{% url 'Users:UsersHome' username %}" style="text-decoration: none; color: white;">Home</a>
+        </div>
+        <div class="NavigationCells GamesCell">
+          <a href="{% url 'Games:AllGames' username %}" style="text-decoration: none; color: white;">Games</a>
+        </div>
+        <div class="NavigationCells StudiosCell">
+          <a href="{% url 'Studio:AllStudios' username %}" style="text-decoration: none; color: white;">Studios</a>
+        </div>
+        <div class="NavigationCells CrackerCell">
+          <a href="{% url 'CrackGroups:AllCrackGroups' username %}" style="text-decoration: none; color: white;">Groups</a>
+        </div>
+        <div class="NavigationCells ProtectionCell">
+          <a href="{% url 'Protection:AllProtections' username %}" style="text-decoration: none; color: white;">Protections</a>
+        </div>
+        <div class="NavigationCells MarketplaceCell">
+          <a href="{% url 'Marketplace:AllMarketplaces' username %}" style="text-decoration: none; color: white;">Marketplaces</a>
+        </div>
+      </div>
+
+      <div class="MainContainer">
+        <div></div>
+
+        <div class="ListContainer">
+
+          <div class="PageInfo"><h3>DRM Protections ({{TotalDRMS}})</h3></div>
+
+          <div class="Divider"></div>
+
+          <div>
+            <div class="Index-Bar DRMInfo">Protection</div>
+            <div class="Index-Bar Games">Games</div>
+            <div class="Index-Bar Latest">Latest Protected Game</div>
+            <div class="Index-Bar Company">Company</div>
+          </div>
+
+          <div class="Divider-Bottom"></div>
+
+          {% for DRM in DRMS %}
+          <div class="Row">
+            <!-- Image -->
+            <div class="Logo">
+              <a href="{% url 'Protection:ProtectionPage' DRM.ID username %}">
+                {% load static %}
+                <img src="{% static DRM.LOGO %}" width="107px" height="60px">
+              </a>
+            </div>
+
+            <!-- Divider -->
+            <div class="VerticalDivider"></div>
+
+            <!-- DRM Name -->
+            <div class="DRM DRMInfo">
+              <div class="DRMName"><a href="{% url 'Protection:ProtectionPage' DRM.ID username %}" style="text-decoration: none; color: #e8e5e0;">{{DRM.Name}}</a></div>
+            </div>
+
+
+            <!-- Total Games -->
+            <div class="Games TotalInfo">
+              <div class="DRMName" style="color: #e8e5e0;">{{DRM.TotalDRMDone}}</div>
+            </div>
+
+
+            <!-- Last Protected Game -->
+            <div class="GameInfo">
+              {% if DRM.TotalDRMDone == 0 %}
+                <div class="DRMName" style="color: #e8e5e0;">No Game Available</div>
+              {% else %}
+                <div class="DRMName"><a href="{% url 'Games:GamesPage' DRM.LatestGameId username %} " style="text-decoration: none; color: #e8e5e0;">{{DRM.LatestGameName}}</a></div>
+              {% endif %}
+            </div>
+            <div class="VerticalDivider"></div>
+            <div class="Logo">
+              {% if DRM.TotalDRMDone == 0 %}
+                {% load static %}
+                <img src="{% static 'images/GameImages/NoGame.png' %}" width="107px" height="60ox">
+              {% else %}
+                <a href="{% url 'Games:GamesPage' DRM.LatestGameId username %} ">
+                  {% load static %}
+                  <img src="{% static DRM.LatestGameImage %}" width="107px" height="60ox">
+                </a>
+              {% endif %}
+            </div>
+
+
+            <!-- Company -->
+            <div class="Company2 TotalInfo"><div class="GroupName">{{DRM.Company}}</div></div>
+
+
+
+          </div>
+          {% endfor %}
+        </div>
+
+        <div></div>
+      </div>
+
+
+    </div>
+
+  </body>
+</html>

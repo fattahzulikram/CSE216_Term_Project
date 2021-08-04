@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add Protection</title>
+    {% block head %}
+    <!-- CSS -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/AddStuffs.css' %}">
+    {% endblock head %}
+  </head>
+  <body>
+
+    <div class="background">
+      <div class="UpperText">Add Protection</div>
+      <div>
+        <form method="POST" autocomplete="off" class="ProtectionForm" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="FormHeader"><h1>Protection Informations</h1></div>
+
+          <div class="PrtBody">
+            <div class="MainFormSingle">
+              <div>
+                <p>
+                  <label for="name">Name</label>
+                  <input type="text" name="name" id="name">
+                </p>
+                <p>
+                  <label for="year">Establishment Year</label>
+                  <input type="text" maxlength="4" name="year" id="year">
+                </p>
+                <p>
+                  <label for="company">Company</label>
+                  <input type="text" name="company" id="company">
+                </p>
+                <p>
+                  <label for="logo">LOGO</label>
+                  <input type="file" name="logo" id="logo">
+                  <!--<input type="text" name="wide_image" id="wide_image">-->
+                </p>
+                <p>
+                  <label for="description">DESCRIPTION</label>
+                  <input type="text" name="description" id="description">
+                </p>
+              </div>
+              <div></div>
+            </div>
+
+            <div class="SubmissionButtonSingle">
+              <div></div>
+              <div><input type="submit" name="go" id="go" value="Submit" class ="button"></div>
+              <div></div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div></div>
+
+    </div>
+
+  </body>
+</html>
