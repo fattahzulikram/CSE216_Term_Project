@@ -1,0 +1,275 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'BLACK AREA';
+  src: local('BLACK AREA'),
+       url('../fonts/BLACK AREA.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Proxima Nova Rg';
+  src: local('ProximaNova-Regular'),
+       url('../fonts/ProximaNova-Regular.otf') format("truetype");
+}
+
+
+body{
+  font-family: 'Proxima Nova Rg';
+}
+
+.background{
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/SingleBG.png') center/cover no-repeat fixed;
+  position: relative;
+}
+
+.NavigationBar{
+  display: grid;
+  grid-template-columns: 320px 320px 320px 320px 320px 320px;
+  font-size: 1.5rem;
+  font-family: 'BLACK AREA';
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.NavigationCells{
+  margin-top: 0.2rem;
+  border: 2px solid black;
+  outline: 4px;
+}
+
+
+.HomeCell{
+  background-color: red;
+}
+
+.GamesCell{
+  background-color: blue;
+}
+
+.StudiosCell{
+  background-color: green;
+}
+
+.CrackerCell{
+  background-color: DimGrey;
+}
+
+.ProtectionCell{
+  background-color: BlueViolet;
+}
+
+
+.MarketplaceCell{
+  background-color: DarkCyan;
+}
+
+.NavigationCells:hover{
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.TopDivider{
+  height: 100px;
+}
+
+.MainContainer{
+  display: grid;
+  grid-template-columns: auto 1170px auto;
+}
+
+
+.MidColumn{
+    display: grid;
+    grid-template-rows: 260px auto;
+}
+
+
+.InfoBox{
+  display: grid;
+  grid-template-columns: 178px 3fr 3fr 2fr;
+  height: 237px;
+  position: relative;
+  background-color: rgb(22,22,24);
+}
+
+.Game-Image{
+  cursor: pointer;
+  width: 178px;
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+}
+
+.TopBox{
+  margin-top: 15px;
+  margin-left: 20px;
+  display: inline-block;
+  width: 225px;
+}
+
+.CrackStatTitleBox{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.InfoTitle{
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  display: inline-block;
+  color: rgb(153, 153, 153);
+}
+
+
+.InfoBody{
+  font-size: 47px;
+  line-height: 47px;
+  font-weight: 500;
+  display: inline-block;
+  font-family: 'BLACK AREA';
+}
+
+.InfoSmallBody{
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 500;
+  display: inline-block;
+  color: #e8e5e0;
+}
+
+.Unreleased{
+  color: Purple;
+}
+
+.Uncracked{
+  color: DarkCyan;
+}
+
+.Cracked{
+  color: Green;
+}
+
+.NoInfo{
+  color: Red;
+}
+
+.Normal{
+  color: #e8e5e0;
+}
+
+.BottomBox{
+  margin-left: 20px;
+}
+
+.DateAndStuffs{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+}
+
+.MarketplaceInfo{
+  display: grid;
+  grid-template-rows: 25fr 40fr 40fr 40fr;
+}
+
+.MarketRow{
+  display: grid;
+  grid-template-columns: 70fr 30fr;
+}
+
+.FollowerAndRatingColumn{
+  display: grid;
+  grid-template-rows: 31px 10px 40px 10px 40px 31px 40px auto;
+}
+
+.Clickable{
+  display: block;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #e8e5e0;
+  background-color: #27282f;
+  background-image: none;
+  border: none;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  text-align: center;
+  vertical-align: middle;
+}
+
+.Clickable:hover{
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.Search-Bar{
+  background-color: #27282f;
+  border: none;
+  display: block;
+  height: 30px;
+  width: 50px;
+  padding: 6px 12px;
+  font-size: 18px;
+  line-height: 18px;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  color: #e8e5e0;
+}
+
+.RatingRow{
+  display: grid;
+  grid-template-columns: 50px 50px 50px auto 30px;
+}
+
+.MidDivider{
+  height: 20px;
+}
+
+.MainBody{
+  display: grid;
+  grid-template-columns: 200px auto 600px;
+}
+
+.RowTitle{
+  color: #e8e5e0;
+  font-family: 'BLACK AREA';
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  display: block;
+  margin-top:10px;
+}
+
+.CrackersRow{
+  text-align: left;
+  color: #e8e5e0;
+  font-family: 'BLACK AREA';
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.Description{
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: normal;
+  display: inline-block;
+  color: #e8e5e0;
+}
+
+.CenterStuff{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

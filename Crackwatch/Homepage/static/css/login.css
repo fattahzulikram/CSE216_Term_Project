@@ -1,0 +1,145 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Earwig Factory';
+  src: local('earwig factory rg'),
+       url('../static/fonts/earwig factory rg.ttf') format("truetype");
+}
+
+@font-face{
+  font-family: 'Catamaran';
+  src: local('Catamaran-Regular'),
+       url('../static/fonts/Catamaran-Regular.ttf') format("truetype");
+}
+
+:root{
+  --stylishText: 'Earwig Factory', monospace;
+  --normalText: 'Catamaran', sans-serif;
+  --primaryDark: #1A1D1A;
+  --primaryLight: #ddb8ba;
+  --mainTransition:all 0.3s ease-in-out;
+  --letterSpacing: 0.5rem;
+}
+body{
+  font-family: var(--normalText);
+}
+
+/*Header*/
+.body{
+  min-height: 100vh;
+  background: url('../images/banner4.jpg') center/cover no-repeat fixed;
+}
+
+.signupbody{
+  min-height: 100vh;
+  background: url('../images/banner4.jpg');
+  min-height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  padding-bottom: 20px;
+}
+
+.banner{
+  left: 50%;
+  text-align: center;
+  letter-spacing: var(--letterSpacing);
+}
+
+.subtitle{
+  font-size: 3rem;
+  font-family: var(--stylishText);
+  color: white;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.logo{
+  display: block;
+  margin: 0 auto;
+}
+
+form {
+ 	background:#111;
+  width:400px;
+  margin:30px auto;
+  border-radius:0.4em;
+  border:1px solid #191919;
+  overflow:hidden;
+  position:relative;
+  box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
+}
+
+form h1 {
+  font-family: var(--normalText);
+  color: var(--primaryLight);
+  font-size:18px;
+  text-shadow:0 1px 0 black;
+  text-align:center;
+  padding:15px 0;
+  border-bottom:1px solid rgba(0,0,0,1);
+  position:relative;
+}
+
+label {
+ 	color:#666;
+  display:block;
+  padding-bottom:9px;
+}
+
+input[type=text],
+input[type=password] {
+ 	width:100%;
+  padding:8px 5px;
+  background:linear-gradient(#1f2124, #27292c);
+  border:1px solid #222;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.1);
+  border-radius:0.3em;
+  margin-bottom:20px;
+  color: white;
+}
+
+input[type=text]:hover,
+input[type=password]:hover,
+label:hover ~ input[type=text],
+label:hover ~ input[type=password] {
+ 	background:#27292c;
+}
+
+.inset {
+ 	padding:20px;
+  border-top:1px solid #19191a;
+}
+
+.button{
+  display: block;
+  background: var(--primaryLight);
+  text-transform: uppercase;
+  padding: 0.6rem 1.0rem;
+  color: var(--primaryDark);
+  font-weight: bold;
+  outline: 0.2rem solid var(--primaryLight);
+  outline-offset: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  transition: var(--mainTransition);
+}
+
+.button:hover{
+  color: white;
+  opacity: 0.7;
+}
+
+.errorMessage{
+  color:#cc0000;
+  display:block;
+  padding-bottom:9px;
+}
