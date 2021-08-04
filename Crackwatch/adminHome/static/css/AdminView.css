@@ -1,0 +1,192 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Earwig Factory';
+  src: local('earwig factory rg'),
+       url('../fonts/earwig factory rg.ttf') format("truetype");
+}
+@font-face {
+  font-family: 'BLACK AREA';
+  src: local('BLACK AREA'),
+       url('../fonts/BLACK AREA.ttf') format("truetype");
+}
+
+:root{
+  --stylishText: 'Earwig Factory', monospace;
+  --primaryDark: #1A1D1A;
+  --primaryLight: #ddb8ba;
+  --mainTransition:all 0.3s ease-in-out;
+  --letterSpacing: 0.5rem;
+}
+
+.background{
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../images/banner2.jpg') center/cover no-repeat fixed;
+  position: relative;
+}
+
+.header{
+  display: grid;
+  grid-template-columns: 1560px 360px;
+  min-height: 10vh;
+  border-bottom-style: solid;
+  border-bottom-color: coral;
+}
+
+.HeaderText{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 4rem;
+  font-family: var(--stylishText);
+  color: white;
+  text-align: center;
+  border-bottom: 1px;
+  border-right-style: solid;
+  border-right-color: coral;
+}
+
+.UsernamePanel{
+  display: grid;
+  grid-template-rows: 2.5rem 2.5rem;
+  font-size: 2rem;
+  font-family: 'BLACK AREA';
+  color: white;
+  text-align: center;
+}
+
+.Username{
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.Logout{
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.Logout:hover{
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.LineOne{
+  display: grid;
+  grid-template-columns: 320px 320px 320px 320px 320px 320px;
+  color: white;
+  font-size: 2rem;
+  font-family: 'BLACK AREA';
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 3rem;
+  grid-auto-flow: row;
+}
+
+.LineTwo{
+  display: grid;
+  grid-template-columns: 320px 320px 320px 320px 320px 320px;
+  color: white;
+  font-size: 2rem;
+  font-family: 'BLACK AREA';
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 3rem;
+  grid-auto-flow: row;
+}
+
+.ButtonHolder{
+  border: 2px solid black;
+  outline: 4px;
+  height: 90px;
+  width: 320px;
+  line-height: 90px;
+  color: white;
+  font-size: 2rem;
+  font-family: 'BLACK AREA';
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.Cell1{
+  background-color: red;
+}
+
+.Cell2{
+  background-color: green;
+}
+
+.Cell3{
+  background-color: blue;
+}
+
+.Cell4{
+  background-color: DarkSlateGrey;
+}
+
+.Cell5{
+  background-color: DarkCyan;
+}
+
+.Cell6{
+  background-color: Brown;
+}
+
+.Cell7{
+  background-color: BlueViolet;
+}
+
+.ButtonHolder:hover{
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.Container{
+  display: grid;
+  grid-template-rows: 170px 500px;
+}
+
+.InnerContainer{
+  display: grid;
+  grid-template-columns: auto 940px 10px 940px auto;
+  margin-top: 10px;
+}
+
+.NewInnerContainer{
+  display: grid;
+  grid-template-rows: 145px 100px 10px 100px 145px;
+}
+
+.ButtonPanel{
+  display: grid;
+  grid-template-rows: 100px 410px;
+  border: 1px solid white;
+}
+
+.Columns{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: auto 450px 20px 450px auto;
+}
+
+.ColumnOne{
+  display: grid;
+  grid-template-rows: 100px 100px 100px 100px;
+}
+
+.ColumnTwo{
+  display: grid;
+  grid-template-rows: 55px 100px 100px 100px 55px;
+}
+
+.MenuText{
+  font-size: 4rem;
+  font-family: var(--stylishText);
+  color: white;
+  text-align: center;
+  line-height: 170px;
+  border: 1px solid white;
+}
